@@ -1,22 +1,11 @@
-import React, {Component} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import React, { Component } from 'react';
 
-export default class App extends Component{
-  render(){
+import Routes from './navigation/router';
 
-    return(
-
-      <>
-      </>
-
-    )
-
-  }
-} 
+export default class App extends Component {
+  render() {
+    return (
+      <Routes />
+    );
+  };
+};
