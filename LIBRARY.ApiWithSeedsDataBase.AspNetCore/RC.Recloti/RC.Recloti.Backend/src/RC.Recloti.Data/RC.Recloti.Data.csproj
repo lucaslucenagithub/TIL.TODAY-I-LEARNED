@@ -1,0 +1,69 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200101155719_seedTest.cs" />
+    <Compile Remove="Migrations\20200101155719_seedTest.Designer.cs" />
+    <Compile Remove="Migrations\20200101165430_seedTest.cs" />
+    <Compile Remove="Migrations\20200101165430_seedTest.Designer.cs" />
+    <Compile Remove="Migrations\20200101165755_seedTest.cs" />
+    <Compile Remove="Migrations\20200101165755_seedTest.Designer.cs" />
+    <Compile Remove="Migrations\20200101172703_seedTest.cs" />
+    <Compile Remove="Migrations\20200101172703_seedTest.Designer.cs" />
+    <Compile Remove="Migrations\20200101182418_seedTest.cs" />
+    <Compile Remove="Migrations\20200101182418_seedTest.Designer.cs" />
+    <Compile Remove="Migrations\20200101185856_seedTest.cs" />
+    <Compile Remove="Migrations\20200101185856_seedTest.Designer.cs" />
+    <Compile Remove="Migrations\20200103020418_seedTest.cs" />
+    <Compile Remove="Migrations\20200103020418_seedTest.Designer.cs" />
+    <Compile Remove="Migrations\20200103025548_seedTest.cs" />
+    <Compile Remove="Migrations\20200103025548_seedTest.Designer.cs" />
+    <Compile Remove="Migrations\20200103030525_seedTest.cs" />
+    <Compile Remove="Migrations\20200103030525_seedTest.Designer.cs" />
+    <Compile Remove="Migrations\20200103030723_seedTest.cs" />
+    <Compile Remove="Migrations\20200103030723_seedTest.Designer.cs" />
+    <Compile Remove="Migrations\20200103031053_seedTest.cs" />
+    <Compile Remove="Migrations\20200103031053_seedTest.Designer.cs" />
+    <Compile Remove="Migrations\20200103031315_seedTest.cs" />
+    <Compile Remove="Migrations\20200103031315_seedTest.Designer.cs" />
+    <Compile Remove="Migrations\20200103031649_seedTest.cs" />
+    <Compile Remove="Migrations\20200103031649_seedTest.Designer.cs" />
+    <Compile Remove="Migrations\20200103031721_seedTest.cs" />
+    <Compile Remove="Migrations\20200103031721_seedTest.Designer.cs" />
+    <Compile Remove="Migrations\20200103031830_seedTest.cs" />
+    <Compile Remove="Migrations\20200103031830_seedTest.Designer.cs" />
+    <Compile Remove="Migrations\20200103032025_seedTest.cs" />
+    <Compile Remove="Migrations\20200103032025_seedTest.Designer.cs" />
+    <Compile Remove="Migrations\20200103034608_seedTest2.cs" />
+    <Compile Remove="Migrations\20200103034608_seedTest2.Designer.cs" />
+    <Compile Remove="Migrations\20200103040309_seedTest3.cs" />
+    <Compile Remove="Migrations\20200103040309_seedTest3.Designer.cs" />
+    <Compile Remove="Migrations\20200103041750_seedTest3.cs" />
+    <Compile Remove="Migrations\20200103041750_seedTest3.Designer.cs" />
+    <Compile Remove="Migrations\20200103050141_seedTest5.cs" />
+    <Compile Remove="Migrations\20200103050141_seedTest5.Designer.cs" />
+    <Compile Remove="Migrations\20200103051041_seedTest6.cs" />
+    <Compile Remove="Migrations\20200103051041_seedTest6.Designer.cs" />
+    <Compile Remove="Migrations\20200103051156_seedTest6.cs" />
+    <Compile Remove="Migrations\20200103051156_seedTest6.Designer.cs" />
+    <Compile Remove="Migrations\20200103051253_seedTest7.cs" />
+    <Compile Remove="Migrations\20200103051253_seedTest7.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RC.Recloti.Domain\RC.Recloti.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
