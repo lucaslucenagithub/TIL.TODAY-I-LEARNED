@@ -1,97 +1,102 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React, { Fragment, Component } from 'react';
 
-import React, {Fragment} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import {StyleSheet, FlatList, Text, Button, TextInput, View} from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {HubConnectionBuilder, LogLevel} from '@aspnet/signalr';
 
-const App = () => {
-  return (
-    <Fragment>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </Fragment>
-  );
+export default class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      hubConnection: null,
+      messages: [],
+      message: '',
+      nick: ''
+    };
+  }
+
+  componentWillMount() {
+    this.setState({
+      hubConnection: new HubConnectionBuilder()
+        .withUrl("http://192.168.1.43:63819/chat")
+        .configureLogging(LogLevel.Debug)
+        .build()
+    });
+  }
+
+  componentDidMount() {
+    this.state.hubConnection
+      .start()
+      .then(() => console.log('Connection started!'))
+      .catch(err => console.log('Error while establishing connection', err));
+
+    this.state.hubConnection.on('sendToChannel', (nick, message) => {
+      const text = `${nick}: ${message}`;
+      const messages = this.state.messages.concat([text]);
+      this.setState({ messages });
+    });
+  }
+
+  sendMessage() {
+    this.state.hubConnection
+        .invoke('sendToChannel', this.state.nick, this.state.message)
+        .catch(err => console.error(err));
+
+    this.setState({message: ''});
+}
+
+  render() {
+
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>Welcome to Simple SignalR</Text>
+        <TextInput
+          placeholder={"Nick name"}
+          style={{ height: 40, width: 250, borderColor: 'gray', borderWidth: 1 }}
+          onChangeText={(text) => this.setState({
+            nick: text
+          })}
+          value={this.state.nick}
+        />
+        <TextInput
+          placeholder={"Message"}
+          style={{ height: 40, width: 250, borderColor: 'gray', borderWidth: 1 }}
+          onChangeText={(text) => this.setState({
+            message: text
+          })}
+          value={this.state.message}
+        />
+        <Button
+          onPress={this.sendMessage.bind(this)}
+          title="Send"
+          color="#841584"
+        />
+        <FlatList
+          data={this.state.messages}
+          renderItem={({ item }) => <Text>{item}</Text>}
+        />
+      </View>
+    );
+
+  };
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+  container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#F5FCFF',
   },
-  body: {
-    backgroundColor: Colors.white,
+  welcome: {
+      fontSize: 20,
+      textAlign: 'center',
+      margin: 10,
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
+  instructions: {
+      textAlign: 'center',
+      color: '#333333',
+      marginBottom: 5,
   },
 });
-
-export default App;

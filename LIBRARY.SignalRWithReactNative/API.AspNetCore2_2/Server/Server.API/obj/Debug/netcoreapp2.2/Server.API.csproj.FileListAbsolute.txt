@@ -1,0 +1,16 @@
+C:\MeusProjetos\TIL.TODAY-I-LEARNED\LIBRARY.SignalRWithReactNative\API.AspNetCore2_2\Server\Server.API\bin\Debug\netcoreapp2.2\appsettings.Development.json
+C:\MeusProjetos\TIL.TODAY-I-LEARNED\LIBRARY.SignalRWithReactNative\API.AspNetCore2_2\Server\Server.API\bin\Debug\netcoreapp2.2\appsettings.json
+C:\MeusProjetos\TIL.TODAY-I-LEARNED\LIBRARY.SignalRWithReactNative\API.AspNetCore2_2\Server\Server.API\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+C:\MeusProjetos\TIL.TODAY-I-LEARNED\LIBRARY.SignalRWithReactNative\API.AspNetCore2_2\Server\Server.API\bin\Debug\netcoreapp2.2\Server.API.deps.json
+C:\MeusProjetos\TIL.TODAY-I-LEARNED\LIBRARY.SignalRWithReactNative\API.AspNetCore2_2\Server\Server.API\bin\Debug\netcoreapp2.2\Server.API.runtimeconfig.json
+C:\MeusProjetos\TIL.TODAY-I-LEARNED\LIBRARY.SignalRWithReactNative\API.AspNetCore2_2\Server\Server.API\bin\Debug\netcoreapp2.2\Server.API.runtimeconfig.dev.json
+C:\MeusProjetos\TIL.TODAY-I-LEARNED\LIBRARY.SignalRWithReactNative\API.AspNetCore2_2\Server\Server.API\bin\Debug\netcoreapp2.2\Server.API.dll
+C:\MeusProjetos\TIL.TODAY-I-LEARNED\LIBRARY.SignalRWithReactNative\API.AspNetCore2_2\Server\Server.API\bin\Debug\netcoreapp2.2\Server.API.pdb
+C:\MeusProjetos\TIL.TODAY-I-LEARNED\LIBRARY.SignalRWithReactNative\API.AspNetCore2_2\Server\Server.API\obj\Debug\netcoreapp2.2\Server.API.csprojAssemblyReference.cache
+C:\MeusProjetos\TIL.TODAY-I-LEARNED\LIBRARY.SignalRWithReactNative\API.AspNetCore2_2\Server\Server.API\obj\Debug\netcoreapp2.2\Server.API.RazorAssemblyInfo.cache
+C:\MeusProjetos\TIL.TODAY-I-LEARNED\LIBRARY.SignalRWithReactNative\API.AspNetCore2_2\Server\Server.API\obj\Debug\netcoreapp2.2\Server.API.RazorAssemblyInfo.cs
+C:\MeusProjetos\TIL.TODAY-I-LEARNED\LIBRARY.SignalRWithReactNative\API.AspNetCore2_2\Server\Server.API\obj\Debug\netcoreapp2.2\Server.API.AssemblyInfoInputs.cache
+C:\MeusProjetos\TIL.TODAY-I-LEARNED\LIBRARY.SignalRWithReactNative\API.AspNetCore2_2\Server\Server.API\obj\Debug\netcoreapp2.2\Server.API.AssemblyInfo.cs
+C:\MeusProjetos\TIL.TODAY-I-LEARNED\LIBRARY.SignalRWithReactNative\API.AspNetCore2_2\Server\Server.API\obj\Debug\netcoreapp2.2\Server.API.RazorTargetAssemblyInfo.cache
+C:\MeusProjetos\TIL.TODAY-I-LEARNED\LIBRARY.SignalRWithReactNative\API.AspNetCore2_2\Server\Server.API\obj\Debug\netcoreapp2.2\Server.API.dll
+C:\MeusProjetos\TIL.TODAY-I-LEARNED\LIBRARY.SignalRWithReactNative\API.AspNetCore2_2\Server\Server.API\obj\Debug\netcoreapp2.2\Server.API.pdb
