@@ -12153,6 +12153,7 @@
     ".NETCoreApp,Version=v2.2": [
       "Microsoft.AspNetCore.App >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
+      "Microsoft.AspNetCore.SignalR >= 1.1.0",
       "Microsoft.NETCore.App >= 2.2.0"
     ]
   },
@@ -12163,11 +12164,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\MeusProjetos\\TIL.TODAY-I-LEARNED\\LIBRARY.SignalRWithReactNative\\API.AspNetCore2_2\\src\\Server\\Server.API\\Server.API.csproj",
+      "projectUniqueName": "C:\\MeusProjetos\\TIL.TODAY-I-LEARNED\\LIBRARY.SignalRWithReactNative\\API.AspNetCore2_2\\Server\\Server.API\\Server.API.csproj",
       "projectName": "Server.API",
-      "projectPath": "C:\\MeusProjetos\\TIL.TODAY-I-LEARNED\\LIBRARY.SignalRWithReactNative\\API.AspNetCore2_2\\src\\Server\\Server.API\\Server.API.csproj",
+      "projectPath": "C:\\MeusProjetos\\TIL.TODAY-I-LEARNED\\LIBRARY.SignalRWithReactNative\\API.AspNetCore2_2\\Server\\Server.API\\Server.API.csproj",
       "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-      "outputPath": "C:\\MeusProjetos\\TIL.TODAY-I-LEARNED\\LIBRARY.SignalRWithReactNative\\API.AspNetCore2_2\\src\\Server\\Server.API\\obj\\",
+      "outputPath": "C:\\MeusProjetos\\TIL.TODAY-I-LEARNED\\LIBRARY.SignalRWithReactNative\\API.AspNetCore2_2\\Server\\Server.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -12209,6 +12210,10 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[2.2.0, )"
+          },
+          "Microsoft.AspNetCore.SignalR": {
+            "target": "Package",
+            "version": "[1.1.0, )"
           },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",

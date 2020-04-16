@@ -25,6 +25,16 @@ namespace Server.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+            {
+                builder
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowAnyOrigin();
+            }));
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +46,11 @@ namespace Server.API
             }
 
             app.UseMvc();
+
+            app.UseCors("CorsPolicy");
+
+            // SignalR Hubs EndPoints
+            app.UseSignalR(routes => { routes.MapHub<ChatHub>("/chat"); });
         }
     }
 }
