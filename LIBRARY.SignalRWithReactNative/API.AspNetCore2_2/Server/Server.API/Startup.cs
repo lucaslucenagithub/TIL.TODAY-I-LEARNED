@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,12 +25,13 @@ namespace Server.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+            services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
             {
                 builder
                     .AllowAnyMethod()
                     .AllowAnyHeader()
-                    .AllowAnyOrigin();
+                    .AllowAnyOrigin()
+                    .AllowCredentials();
             }));
 
             services.AddSignalR();
@@ -47,8 +49,10 @@ namespace Server.API
 
             app.UseCors("CorsPolicy");
 
-            // SignalR Hubs EndPoints
-            app.UseSignalR(routes => { routes.MapHub<ChatHub>("/chat"); });
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/ChatHub/chat");
+            });
 
             app.UseMvc();
         }

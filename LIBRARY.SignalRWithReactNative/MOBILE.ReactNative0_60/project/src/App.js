@@ -2,7 +2,7 @@ import React, { Fragment, Component } from 'react';
 
 import {StyleSheet, FlatList, Text, Button, TextInput, View} from 'react-native';
 
-import {HubConnectionBuilder, LogLevel} from '@aspnet/signalr';
+import * as signalR from '@aspnet/signalr';
 
 export default class App extends Component {
 
@@ -18,9 +18,12 @@ export default class App extends Component {
 
   componentWillMount() {
     this.setState({
-      hubConnection: new HubConnectionBuilder()
-        .withUrl("http://192.168.1.43:63819/chat")
-        .configureLogging(LogLevel.Debug)
+      hubConnection: new signalR.HubConnectionBuilder()
+        .withUrl("http://localhost:63819/ChatHub/chat", {
+          skipNegotiation: true,
+          transport: signalR.HttpTransportType.WebSockets,
+        })
+        .configureLogging(signalR.LogLevel.Debug)
         .build()
     });
   }
