@@ -8,8 +8,11 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@aspnet/signalr": "^1.1.4",
+    "@react-native-community/geolocation": "^2.0.2",
     "react": "16.8.6",
-    "react-native": "0.60.0"
+    "react-native": "0.60.0",
+    "react-native-maps": "^0.27.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

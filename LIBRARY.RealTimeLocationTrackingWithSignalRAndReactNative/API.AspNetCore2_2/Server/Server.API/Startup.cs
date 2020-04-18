@@ -51,7 +51,7 @@ namespace Server.API
 
             app.UseSignalR(routes =>
             {
-                routes.MapHub<ChatHub>("/ChatHub/chat");
+                routes.MapHub<TrackingHub>("/tracking");
             });
 
             app.UseMvc();

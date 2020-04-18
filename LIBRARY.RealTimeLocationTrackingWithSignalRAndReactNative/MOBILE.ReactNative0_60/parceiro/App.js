@@ -1,97 +1,164 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
-import React, {Fragment} from 'react';
+import React from "react";
 import {
-  SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
-  Text,
-  StatusBar,
-} from 'react-native';
+  Platform,
+  Dimensions,
+  SafeAreaView,
+  Button,
+} from "react-native";
+import MapView, { Marker, AnimatedRegion } from "react-native-maps";
+import Geolocation from '@react-native-community/geolocation';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import * as signalR from '@aspnet/signalr';
 
-const App = () => {
-  return (
-    <Fragment>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
+const { width, height } = Dimensions.get("window");
+
+const ASPECT_RATIO = width / height;
+const LATITUDE = 37.78825;
+const LONGITUDE = -122.4324;
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      hubConnection: null,
+      latitude: LATITUDE,
+      longitude: LONGITUDE,
+      coordinate: new AnimatedRegion({
+        latitude: LATITUDE,
+        longitude: LONGITUDE,
+        latitudeDelta: 0,
+        longitudeDelta: 0
+      })
+    };
+  };
+
+  componentWillMount() {
+    this.setState({
+      hubConnection: new signalR.HubConnectionBuilder()
+        .withUrl("http://localhost:63819/tracking", {
+          skipNegotiation: true,
+          transport: signalR.HttpTransportType.WebSockets,
+        })
+        .configureLogging(signalR.LogLevel.Debug)
+        .build()
+    });
+  }
+
+  componentDidMount() {
+    this.state.hubConnection
+      .start()
+      .then(() => console.log('Connection started!'))
+      .catch(err => console.log('Error while establishing connection', err));
+
+    this.watchLocation();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.latitude !== prevState.latitude) {
+      console.log("PROPS>>" + this.props.latitude + "|" + prevState.latitude)
+      console.log("Hubconnection>>" + this.state.hubConnection);
+    }
+  }
+
+  componentWillUnmount() {
+    Geolocation.clearWatch(this.watchID);
+  }
+
+  watchLocation = () => {
+    const { coordinate } = this.state;
+
+    this.watchID = Geolocation.watchPosition(
+      position => {
+        const { latitude, longitude } = position.coords;
+        console.log("WATCHLOCATION>>" + position.coords);
+
+        const newCoordinate = {
+          latitude,
+          longitude
+        };
+
+        if (Platform.OS === "android") {
+          if (this.marker) {
+            this.marker._component.animateMarkerToCoordinate(
+              newCoordinate,
+              500 // 500 is the duration to animate the marker
+            );
+          }
+        } else {
+          coordinate.timing(newCoordinate).start();
+        }
+
+        this.setState({
+          latitude,
+          longitude
+        });
+      },
+      error => console.log(error),
+      {
+        enableHighAccuracy: true,
+        timeout: 20000,
+        maximumAge: 1000,
+        distanceFilter: 10
+      }
+    );
+  };
+
+  getMapRegion = () => ({
+    latitude: this.state.latitude,
+    longitude: this.state.longitude,
+    latitudeDelta: LATITUDE_DELTA,
+    longitudeDelta: LONGITUDE_DELTA
+  });
+
+  sendLocation() {
+    this.state.hubConnection
+      .invoke('sendToChannel', this.state.latitude, this.state.longitude)
+      .catch(err => console.error(err));
+  }
+
+  render() {
+    return (
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={styles.container}>
+          <MapView
+            style={styles.map}
+            showUserLocation
+            followUserLocation
+            loadingEnabled
+            region={this.getMapRegion()}
+          >
+            <Marker.Animated
+              ref={marker => {
+                this.marker = marker;
+              }}
+              coordinate={this.state.coordinate}
+            />
+          </MapView>
+        </View>
+        <View>
+        <Button
+            onPress={this.sendLocation.bind(this)}
+            title="Send Location"
+            color="#841584"
+          />
+        </View>
       </SafeAreaView>
-    </Fragment>
-  );
-};
+    );
+  }
+}
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+  container: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: "flex-end",
+    alignItems: "center"
   },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+  map: {
+    ...StyleSheet.absoluteFillObject
+  }
 });
-
-export default App;
