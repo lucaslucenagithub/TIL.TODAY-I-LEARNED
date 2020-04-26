@@ -1,0 +1,55 @@
+.sections > * {
+  display: block;
+}
+
+.intro {
+  background-image: url(https://otradermilionario.com.br/wp-content/uploads/2020/04/BG-min.png);
+  background-position: top right;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: justify;
+}
+
+.intro .intro-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 200px;
+}
+
+.intro .intro-content .logo-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro .intro-content .logo-intro > img {
+  width: 20%;
+}
+
+.intro .intro-content .text-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mid {
+  background-color: blue;
+  height: 50vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.end {
+  background-color: yellow;
+  height: 50vh;
+  background-size: cover;
+  background-position: center;
+}
