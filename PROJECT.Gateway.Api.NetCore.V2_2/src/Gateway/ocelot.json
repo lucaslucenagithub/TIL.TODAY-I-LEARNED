@@ -1,41 +1,83 @@
 ﻿{
-    "ReRoutes": [
-      {
-        "DownstreamPathTemplate": "/api/usuarios/{id}",
-        "DownstreamScheme": "http",
-        "DownstreamHostAndPorts": [
-          {
-            "Host": "localhost",
-            "Port": 3001
-          }
-        ],
-        "UpstreamPathTemplate": "/usuarios/{id}",
-        "UpstreamHttpMethod": [ "Get" ],
-        "Key": "usuario"
-      },
-      {
-        "DownstreamPathTemplate": "/api/quiz/usuario/{id}",
-        "DownstreamScheme": "http",
-        "DownstreamHostAndPorts": [
-          {
-            "Host": "localhost",
-            "Port": 3002  
-          }
-        ],
-        "UpstreamPathTemplate": "/quiz/usuario/{id}",
-        "UpstreamHttpMethod": [ "Get" ],
-        "Key": "quiz-usuario"
-      }
-    ],
-    "Aggregates": [
-      {
-        "ReRouteKeys": [
-          "usuario",
-          "quiz-usuario"
-        ],
-        "UpstreamPathTemplate": "/ocelote/quiz/usuario/{id}",
-        "Aggregator": "QuizUsuarioAggregator"
-      }
-    ],
-    "GlobalConfiguration": {}
-  }
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/api/usuarios/{catchAll}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3001
+        }
+      ],
+      "UpstreamPathTemplate": "/usuarios/{catchAll}",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "Priority": 0 //hardcoded, not recomended cause already a default value of catchAll config
+    },
+    {
+      "DownstreamPathTemplate": "/api/usuarios/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3001
+        }
+      ],
+      "UpstreamPathTemplate": "/usuarios/{id}",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "Priority": 1,
+      "Key": "usuario"
+    },
+    {
+      "DownstreamPathTemplate": "/api/quiz/usuario/{catchAll}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3002
+        }
+      ],
+      "UpstreamPathTemplate": "/quiz/usuario/{catchAll}",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "Priority": 0
+    },
+    {
+      "DownstreamPathTemplate": "/api/quiz/usuario/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3002
+        }
+      ],
+      "UpstreamPathTemplate": "/quiz/usuario/{id}",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "Key": "quiz-usuario",
+      "Priority": 1
+    }
+  ],
+  "Aggregates": [
+    {
+      "ReRouteKeys": [
+        "usuario",
+        "quiz-usuario"
+      ],
+      "UpstreamPathTemplate": "/ocelote/quiz/usuario/{id}",
+      "Aggregator": "QuizUsuarioAggregator"
+    }
+  ],
+  "GlobalConfiguration": {}
+}

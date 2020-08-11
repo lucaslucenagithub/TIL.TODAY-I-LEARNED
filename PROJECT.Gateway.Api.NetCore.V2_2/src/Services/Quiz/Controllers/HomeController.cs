@@ -27,9 +27,9 @@ namespace Quiz.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        
+
         [HttpGet("usuario/{id:int}")]
-        public IActionResult GetOrdersByUsuarioId(int id)
+        public IActionResult GetQuizByUsuarioId(int id)
         {
             throw new NotImplementedException();
         }

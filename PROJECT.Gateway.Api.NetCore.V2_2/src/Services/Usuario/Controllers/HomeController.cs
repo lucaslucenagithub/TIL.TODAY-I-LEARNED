@@ -26,6 +26,12 @@ namespace Usuario.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }        
+        
+        [HttpGet("throwExceptionTeste")]
+        public IActionResult GetExceptionTeste()
+        {
+            throw new Exception("Teste");
         }
 
         [HttpGet("{id:int}")]
