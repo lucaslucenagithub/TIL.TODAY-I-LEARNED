@@ -16,6 +16,10 @@
         "Put",
         "Delete"
       ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      },
       "Priority": 0 //hardcoded, not recomended cause already a default value of catchAll config
     },
     {
@@ -33,6 +37,20 @@
       ],
       "Priority": 1,
       "Key": "usuario"
+    },
+    {
+      "DownstreamPathTemplate": "/api/usuarios/login",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3001
+        }
+      ],
+      "UpstreamPathTemplate": "/usuarios/login",
+      "UpstreamHttpMethod": [
+        "Get"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/quiz/usuario/{catchAll}",
